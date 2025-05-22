@@ -1,35 +1,59 @@
-/* Set up the body to center content both vertically and horizontally,
-   apply a gradient background, and remove default margin */
+/* 
+  Set up the body to center content both vertically and horizontally,
+  apply a vertical gradient background, and remove default margin.
+*/
 body {
-  min-height: 100vh; /* Full viewport height */
-  display: flex; /* Enable flexbox layout */
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  display: flex; /* Use flexbox for layout */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  background: linear-gradient(to bottom, #ffb347 0%, #ff6a6a 100%); /* Simpler top-down gradient */
+  background: linear-gradient(to bottom, #ffb347 0%, #ff6a6a 100%); /* Top-down orange to pink gradient */
   margin: 0; /* Remove default margin */
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif; /* Set base font */
 }
 
-/* Center the card and button in a column layout */
+/* 
+  Center the card and any other content in a column layout.
+  Ensures content is above the decorative background.
+*/
 .center-wrapper {
-  display: flex; /* Use flexbox */
+  display: flex; /* Enable flexbox */
   flex-direction: column; /* Stack children vertically */
   align-items: center; /* Center items horizontally */
   justify-content: center; /* Center items vertically */
+  position: relative; /* Needed for z-index stacking */
+  z-index: 1; /* Place above background */
 }
 
-/* Style the profile card container */
+/* 
+  Style the profile card container:
+  - White background
+  - Padding for spacing
+  - Rounded corners
+  - Subtle shadow for depth
+  - Responsive width
+  - Centered text
+  - Positioned above background
+*/
 .card {
-  background: #fff; /* White background */
-  padding: 32px 40px; /* Space inside the card */
-  border-radius: 16px; /* Rounded corners */
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12); /* Subtle shadow for depth */
-  text-align: center; /* Center text inside the card */
-  max-width: 500px; /* Maximum width of the card */
-  width: 100%; /* Responsive width */
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-/* Profile image styling */
+/* 
+  Profile image styling:
+  - Fixed size
+  - Circular shape
+  - Object-fit for proper cropping
+  - Subtle shadow for depth
+*/
 .card .profile-img {
   width: 96px;
   height: 96px;
@@ -38,39 +62,113 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
-/* Remove bullet points and add spacing to the list */
+/* 
+  Remove bullet points from the list and add spacing.
+  - No default list style
+  - No left padding
+  - Top margin for separation from heading
+*/
 .card ul {
   list-style: none;
   padding: 0;
   margin: 19px 0 0 0;
 }
 
+/* 
+  Add vertical spacing between list items.
+*/
 .card ul li {
   margin-bottom: 11px;
 }
 
+/* 
+  Remove bottom margin from the last list item.
+*/
 .card ul li:last-child {
   margin-bottom: 0;
 }
 
-/* Style the main heading inside the card */
+/* 
+  Style the main heading inside the card:
+  - Large font size
+  - Bottom margin for spacing
+  - Centered text
+  - Dark blue color for emphasis
+*/
 .card h1 {
-  font-size: 38px; /* Large font size */
-  margin-bottom: 8px; /* Space below heading */
-  text-align: center; /* Center the heading */
-  color: #153e75; /* Dark blue color */
+  font-size: 38px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #153e75;
 }
 
-/* Style the subheading inside the card */
+/* 
+  Style the subheading inside the card:
+  - Medium font size
+  - Bottom margin for spacing
+  - Centered text
+  - Muted gray color
+*/
 .card h2 {
-  font-size: 24px; /* Medium font size */
-  margin-bottom: 16px; /* Space below subheading */
-  text-align: center; /* Center the subheading */
-  color: #7a869a; /* Slightly darker gray */
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #7a869a;
 }
 
-/* Style the paragraph inside the card */
+/* 
+  Style the paragraph inside the card:
+  - Slightly larger font size for readability
+  - Increased line height for better spacing
+*/
 .card p {
-  font-size: 18px; /* Slightly larger than default font size */
-  line-height: 1.7; /* Increase line spacing for readability */
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* 
+  Decorative background image on left and right sides:
+  - Fixed position to cover the viewport
+  - Pointer-events none so it doesn't block interaction
+  - z-index 0 to stay behind content
+  - Two images: one on the left, one on the right
+  - Opacity for subtle effect
+  - Replace 'img/One Piece1.png' with your desired image path
+*/
+.bg-sides {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    url('img/One Piece1.png') left center/50vw 100vh no-repeat,
+    url('img/One Piece1.png') right center/50vw 100vh no-repeat;
+  opacity: 1;
+}
+
+/* 
+  Solid color overlay box in front of background images but behind the card.
+  - Uses a sunny yellow color to match the images
+  - Covers most of the viewport width
+  - No gradient
+  - Subtle shadow for depth
+  - Does not interfere with pointer events
+*/
+.overlay-box {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw; /* Changed from 1100px to 80% of viewport width */
+  height: 100vh; /* Full height from top to bottom */
+  max-width: 95vw; /* Prevent overflow on small screens, changed from calc(100vw - 32px) */
+  /* Use a solid sunny yellow color to match the images */
+  background: #010003;
+  z-index: 1;
+  border-radius: 0;
+  box-shadow: 0 0.6vw 3vw rgba(0,0,0,0.10); /* px to vw for shadow */
+  pointer-events: none;
 }
